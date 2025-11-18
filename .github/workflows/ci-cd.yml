@@ -1,0 +1,33 @@
+    name: My CI/CD Workflow # A descriptive name for your workflow
+
+    on:
+      push:
+        branches:
+          - main # Trigger on pushes to the 'main' branch
+
+    jobs:
+      build-and-test: # Name of your job
+        runs-on: ubuntu-latest # Specify the runner environment
+
+        steps:
+          - name: Checkout code # Step to get your code
+            uses: actions/checkout@v4
+
+          - name: Set up Node.js # Example for a Node.js project
+            uses: actions/setup-node@v4
+            with:
+              node-version: '18'
+
+          - name: Install dependencies
+            run: npm install
+
+          - name: Run tests
+            run: npm test
+
+          # Add more steps for building, deploying, etc.
+          # For example, a deployment step:
+          # - name: Deploy to production
+          #   run: ./deploy-script.sh
+          #   env:
+          #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
